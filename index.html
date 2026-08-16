@@ -1,7 +1,11 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <title>YouTube Roulette 🎰</title>
@@ -9,49 +13,71 @@
 <style>
 
 * {
+
   box-sizing: border-box;
+
 }
 
 html, body {
+
   margin: 0;
+
   width: 100%;
+
   height: 100%;
+
   overflow: hidden;
+
   background: #050505;
+
   color: white;
+
   font-family: Arial, Helvetica, sans-serif;
+
 }
 
 #screen {
+
   position: fixed;
+
   inset: 0;
 
   display: grid;
 
   grid-template-columns: repeat(20, 1fr);
+
   grid-template-rows: repeat(12, 1fr);
 
   z-index: 1;
+
 }
 
 .pixel {
+
   border: 1px solid rgba(255,255,255,0.025);
+
 }
 
 #overlay {
+
   position: fixed;
+
   inset: 0;
 
   display: flex;
+
   justify-content: center;
+
   align-items: center;
 
   padding: 20px;
 
   z-index: 5;
+
 }
 
 .panel {
+
   width: min(92%, 600px);
 
   padding: 35px 25px;
@@ -67,13 +93,17 @@ html, body {
   backdrop-filter: blur(15px);
 
   box-shadow: 0 0 80px rgba(0,0,0,0.9);
+
 }
 
 .logo {
+
   font-size: 55px;
+
 }
 
 h1 {
+
   margin: 5px 0 15px;
 
   font-size: clamp(42px,10vw,75px);
@@ -81,17 +111,21 @@ h1 {
   line-height: .9;
 
   letter-spacing: -4px;
+
 }
 
 .tagline {
+
   color: #aaa;
 
   line-height: 1.5;
 
   margin-bottom: 30px;
+
 }
 
 .spin {
+
   display: inline-block;
 
   width: 100%;
@@ -115,21 +149,27 @@ h1 {
   cursor: pointer;
 
   -webkit-tap-highlight-color: transparent;
+
 }
 
 .spin:active {
+
   transform: scale(.96);
+
 }
 
 .status {
+
   margin-top: 18px;
 
   color: #777;
 
   font-size: 13px;
+
 }
 
 #hint {
+
   position: fixed;
 
   bottom: 15px;
@@ -143,13 +183,14 @@ h1 {
   font-size: 11px;
 
   z-index: 10;
+
 }
 
 </style>
+
 </head>
 
 <body>
-
 
 <div id="screen">
 
@@ -158,7 +199,9 @@ h1 {
 for (let i = 0; i < 240; i++) {
 
   document.write(
+
     '<div class="pixel"></div>'
+
   );
 
 }
@@ -167,65 +210,80 @@ for (let i = 0; i < 240; i++) {
 
 </div>
 
-
 <div id="overlay">
 
 <div class="panel">
 
-
 <div class="logo">
-🎰
-</div>
 
+🎰
+
+</div>
 
 <h1>
+
 YouTube<br>
+
 Roulette
+
 </h1>
 
-
 <div class="tagline">
+
 Click the button.<br>
+
 Enter the rabbit hole.
+
 </div>
 
-
 <a
+
 id="roulette"
+
 class="spin"
+
 href="https://www.youtube.com/"
+
 onclick="spinRoulette(event)"
+
 >
 
 🎰 SPIN THE ROULETTE
 
 </a>
 
-
 <div
+
 id="status"
+
 class="status"
+
 >
+
 Ready to roll...
-</div>
-
 
 </div>
 
 </div>
 
+</div>
 
 <div id="hint">
-⚠️ You have been warned.
-</div>
 
+⚠️ You have been warned.
+
+</div>
 
 <script>
 
 /*
+
 ========================================
+
 VIDEO POOL
+
 ========================================
+
 */
 
 const videos = [
@@ -252,60 +310,76 @@ const videos = [
 
 ];
 
-
 /*
+
 ========================================
+
 ROULETTE
+
 ========================================
+
 */
 
 function spinRoulette(event) {
 
   const button =
+
     document.getElementById("roulette");
 
   const status =
+
     document.getElementById("status");
 
-
   /*
+
   Pick a random video.
+
   */
 
   const randomNumber =
+
     Math.floor(
+
       Math.random() * videos.length
+
     );
 
-
   const video =
+
     videos[randomNumber];
 
-
   /*
+
   Change the normal link.
+
   */
 
   button.href =
+
     "https://www.youtube.com/watch?v="
+
     + video;
 
-
   /*
+
   Show confirmation.
+
   */
 
   status.textContent =
+
     "🎬 Rabbit hole selected!";
 
-
   /*
+
   IMPORTANT:
 
   We DO NOT prevent the click.
 
   The browser will now follow
+
   the newly-created normal link.
+
   */
 
 }
@@ -313,4 +387,5 @@ function spinRoulette(event) {
 </script>
 
 </body>
+
 </html>
