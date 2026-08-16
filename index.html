@@ -455,22 +455,7 @@ function spin(){
   updateStats();
 
 
-  setTimeout(()=>{
-
-    screen.classList.remove("spinning");
-
-    document.getElementById("status")
-    .textContent="🎬 Rabbit hole found!";
-
-    button.disabled=false;
-
-    window.open(
-      "https://www.youtube.com/watch?v="+video,
-      "_blank"
-    );
-
-  },1000);
-
+  
 }
 
 
@@ -511,7 +496,10 @@ document.getElementById("share")
 
         url:window.location.href
 
-      });
+      });const youtubeUrl =
+  "https://www.youtube.com/watch?v=" + video;
+
+window.location.href = youtubeUrl;
 
     }catch(e){}
 
