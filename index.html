@@ -1,121 +1,281 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YouTube Roulette</title>
+
+<title>YouTube Roulette 🎰</title>
 
 <style>
+
 * {
-    box-sizing: border-box;
+
+  box-sizing: border-box;
+
 }
 
 html, body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-    overflow: hidden;
-    background: #050505;
-    font-family: Arial, Helvetica, sans-serif;
-    color: white;
+
+  margin: 0;
+
+  width: 100%;
+
+  height: 100%;
+
+  overflow: hidden;
+
+  background: #050505;
+
+  color: white;
+
+  font-family: Arial, Helvetica, sans-serif;
+
 }
 
 #screen {
-    position: fixed;
-    inset: 0;
-    display: grid;
-    grid-template-columns: repeat(30, 1fr);
-    grid-template-rows: repeat(18, 1fr);
+
+  position: fixed;
+
+  inset: 0;
+
+  display: grid;
+
+  grid-template-columns: repeat(30, 1fr);
+
+  grid-template-rows: repeat(18, 1fr);
+
 }
 
 .pixel {
-    border: 1px solid rgba(255,255,255,0.025);
-    cursor: pointer;
-    transition: background 0.15s, transform 0.15s;
+
+  border: 1px solid rgba(255,255,255,.025);
+
+  cursor: pointer;
+
+  transition: .15s;
+
 }
 
 .pixel:hover {
-    background: rgba(255,255,255,0.08);
-    transform: scale(1.08);
+
+  background: rgba(255,255,255,.12);
+
+  transform: scale(1.08);
+
 }
 
 #overlay {
-    position: fixed;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    pointer-events: none;
+
+  position: fixed;
+
+  inset: 0;
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  text-align: center;
+
+  pointer-events: none;
+
 }
 
 .panel {
-    pointer-events: auto;
-    background: rgba(5,5,5,0.88);
-    border: 1px solid rgba(255,255,255,0.15);
-    border-radius: 20px;
-    padding: 35px;
-    max-width: 500px;
-    box-shadow: 0 0 60px rgba(0,0,0,0.8);
-    backdrop-filter: blur(10px);
+
+  pointer-events: auto;
+
+  width: min(90%, 520px);
+
+  padding: 35px 25px;
+
+  border: 1px solid rgba(255,255,255,.15);
+
+  border-radius: 24px;
+
+  background: rgba(5,5,5,.88);
+
+  backdrop-filter: blur(15px);
+
+  box-shadow: 0 0 80px rgba(0,0,0,.9);
+
+}
+
+.logo {
+
+  font-size: 65px;
+
+  margin-bottom: 5px;
+
 }
 
 h1 {
-    margin: 0 0 10px;
-    font-size: clamp(38px, 8vw, 72px);
-    letter-spacing: -3px;
+
+  margin: 0;
+
+  font-size: clamp(38px, 9vw, 70px);
+
+  letter-spacing: -4px;
+
 }
 
-.subtitle {
-    color: #aaa;
-    font-size: 17px;
-    margin-bottom: 28px;
+.tagline {
+
+  margin: 15px 0 28px;
+
+  color: #aaa;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+
 }
 
 button {
-    background: white;
-    color: black;
-    border: 0;
-    border-radius: 999px;
-    padding: 16px 28px;
-    font-size: 17px;
-    font-weight: bold;
-    cursor: pointer;
-    transition: transform 0.15s;
+
+  border: 0;
+
+  border-radius: 999px;
+
+  padding: 16px 28px;
+
+  font-size: 16px;
+
+  font-weight: bold;
+
+  cursor: pointer;
+
+  background: white;
+
+  color: black;
+
+  transition: transform .15s, box-shadow .15s;
+
 }
 
 button:hover {
-    transform: scale(1.05);
+
+  transform: scale(1.06);
+
+  box-shadow: 0 0 30px rgba(255,255,255,.25);
+
+}
+
+button:active {
+
+  transform: scale(.96);
+
 }
 
 #counter {
-    margin-top: 22px;
-    color: #777;
-    font-size: 14px;
+
+  margin-top: 20px;
+
+  color: #777;
+
+  font-size: 13px;
+
 }
 
-#message {
-    position: fixed;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    color: #666;
-    font-size: 12px;
-    pointer-events: none;
+#status {
+
+  height: 20px;
+
+  margin-top: 15px;
+
+  color: #aaa;
+
+  font-size: 13px;
+
 }
 
-@media (max-width: 600px) {
-    #screen {
-        grid-template-columns: repeat(15, 1fr);
-        grid-template-rows: repeat(25, 1fr);
-    }
+#share {
 
-    .panel {
-        margin: 20px;
-        padding: 28px 20px;
-    }
+  display: none;
+
+  margin-top: 12px;
+
+  background: transparent;
+
+  color: white;
+
+  border: 1px solid #444;
+
+  padding: 10px 20px;
+
 }
+
+#hint {
+
+  position: fixed;
+
+  bottom: 18px;
+
+  width: 100%;
+
+  text-align: center;
+
+  color: #555;
+
+  font-size: 11px;
+
+  pointer-events: none;
+
+}
+
+.spinning .pixel {
+
+  animation: flash .35s infinite alternate;
+
+}
+
+@keyframes flash {
+
+  from {
+
+    background: rgba(255,255,255,.02);
+
+  }
+
+  to {
+
+    background: rgba(255,255,255,.18);
+
+  }
+
+}
+
+@media(max-width:600px) {
+
+  #screen {
+
+    grid-template-columns: repeat(15,1fr);
+
+    grid-template-rows: repeat(25,1fr);
+
+  }
+
+  .panel {
+
+    padding: 28px 20px;
+
+  }
+
+  .logo {
+
+    font-size: 52px;
+
+  }
+
+}
+
 </style>
+
 </head>
 
 <body>
@@ -123,85 +283,301 @@ button:hover {
 <div id="screen"></div>
 
 <div id="overlay">
-    <div class="panel">
-        <h1>🎰</h1>
 
-        <h1>YouTube<br>Roulette</h1>
+  <div class="panel">
 
-        <div class="subtitle">
-            Click anywhere.<br>
-            Find something you didn't know existed.
-        </div>
+    <div class="logo">🎰</div>
 
-        <button onclick="spin()">
-            SPIN THE ROULETTE
-        </button>
+    <h1>YouTube<br>Roulette</h1>
 
-        <div id="counter">
-            Rabbit holes entered: 0
-        </div>
+    <div class="tagline">
+
+      Click anywhere.<br>
+
+      Find something you didn't know existed.
+
     </div>
+
+    <button id="spinButton" onclick="spin()">
+
+      SPIN THE ROULETTE
+
+    </button>
+
+    <div id="status"></div>
+
+    <div id="counter">
+
+      Rabbit holes entered: 0
+
+    </div>
+
+    <button id="share" onclick="shareSite()">
+
+      📤 SHARE THE RABBIT HOLE
+
+    </button>
+
+  </div>
+
 </div>
 
-<div id="message">
-    One click could change your entire evening.
+<div id="hint">
+
+  ⚠️ You have been warned. YouTube rabbit holes are addictive.
+
 </div>
 
 <script>
 
+/* --------------------------------
+
+   VIDEO DATABASE
+
+-------------------------------- */
+
 const videos = [
-    "https://www.youtube.com/watch?v=jNQXAC9IVRw",
-    "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-    "https://www.youtube.com/watch?v=9bZkp7q19f0",
-    "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
-    "https://www.youtube.com/watch?v=ScMzIvxBSi4",
-    "https://www.youtube.com/watch?v=ysz5S6PUM-U",
-    "https://www.youtube.com/watch?v=Zi_XLOBDo_Y",
-    "https://www.youtube.com/watch?v=3JZ_D3ELwOQ",
-    "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
-    "https://www.youtube.com/watch?v=fJ9rUzIMcZQ"
+
+  "jNQXAC9IVRw",
+
+  "aqz-KE-bpKQ",
+
+  "ScMzIvxBSi4",
+
+  "ysz5S6PUM-U",
+
+  "Zi_XLOBDo_Y",
+
+  "3JZ_D3ELwOQ",
+
+  "kJQP7kiw5Fk",
+
+  "fJ9rUzIMcZQ",
+
+  "dQw4w9WgXcQ",
+
+  "9bZkp7q19f0"
+
 ];
+
+/* --------------------------------
+
+   PAGE ELEMENTS
+
+-------------------------------- */
 
 const screen = document.getElementById("screen");
 
-let count = Number(localStorage.getItem("rabbitHoles")) || 0;
+const statusText = document.getElementById("status");
+
+const counter = document.getElementById("counter");
+
+const spinButton = document.getElementById("spinButton");
+
+const shareButton = document.getElementById("share");
+
+/* --------------------------------
+
+   CREATE PIXELS
+
+-------------------------------- */
+
+for(let i = 0; i < 540; i++){
+
+  const pixel = document.createElement("div");
+
+  pixel.className = "pixel";
+
+  pixel.addEventListener("click", () => {
+
+    spin();
+
+  });
+
+  screen.appendChild(pixel);
+
+}
+
+/* --------------------------------
+
+   RABBIT HOLE COUNTER
+
+-------------------------------- */
+
+let count = Number(
+
+  localStorage.getItem("rabbitHoles")
+
+) || 0;
 
 updateCounter();
 
-for (let i = 0; i < 540; i++) {
+function updateCounter(){
 
-    const pixel = document.createElement("div");
+  counter.textContent =
 
-    pixel.className = "pixel";
+    "Rabbit holes entered: " + count;
 
-    pixel.addEventListener("click", () => {
-        spin();
-    });
-
-    screen.appendChild(pixel);
 }
 
-function spin() {
+/* --------------------------------
 
-    count++;
+   LAST VIDEO
 
-    localStorage.setItem("rabbitHoles", count);
+-------------------------------- */
 
-    updateCounter();
+let lastVideo =
 
-    const randomVideo =
-        videos[Math.floor(Math.random() * videos.length)];
+  localStorage.getItem("lastVideo") || null;
 
-    window.open(randomVideo, "_blank");
+/* --------------------------------
+
+   SPIN
+
+-------------------------------- */
+
+function spin(){
+
+  if(spinButton.disabled) return;
+
+  spinButton.disabled = true;
+
+  screen.classList.add("spinning");
+
+  statusText.textContent =
+
+    "Searching the rabbit hole...";
+
+  let video;
+
+  do {
+
+    video =
+
+      videos[Math.floor(Math.random() * videos.length)];
+
+  } while(
+
+    video === lastVideo &&
+
+    videos.length > 1
+
+  );
+
+  lastVideo = video;
+
+  localStorage.setItem(
+
+    "lastVideo",
+
+    video
+
+  );
+
+  count++;
+
+  localStorage.setItem(
+
+    "rabbitHoles",
+
+    count
+
+  );
+
+  updateCounter();
+
+  setTimeout(() => {
+
+    screen.classList.remove("spinning");
+
+    statusText.textContent =
+
+      "🎬 FOUND SOMETHING...";
+
+    shareButton.style.display =
+
+      "inline-block";
+
+    /*
+
+      Open YouTube after the animation.
+
+    */
+
+    window.open(
+
+      "https://www.youtube.com/watch?v=" + video,
+
+      "_blank"
+
+    );
+
+    spinButton.disabled = false;
+
+  }, 900);
+
 }
 
-function updateCounter() {
+/* --------------------------------
 
-    document.getElementById("counter").textContent =
-        "Rabbit holes entered: " + count;
+   SHARE
+
+-------------------------------- */
+
+async function shareSite(){
+
+  const text =
+
+    "I just fell down a YouTube rabbit hole 🎰🕳️";
+
+  const url =
+
+    window.location.href;
+
+  if(navigator.share){
+
+    try{
+
+      await navigator.share({
+
+        title: "YouTube Roulette",
+
+        text: text,
+
+        url: url
+
+      });
+
+    } catch(e){}
+
+  } else {
+
+    try{
+
+      await navigator.clipboard.writeText(
+
+        text + " " + url
+
+      );
+
+      statusText.textContent =
+
+        "Link copied!";
+
+    } catch(e){
+
+      statusText.textContent =
+
+        "Share: " + url;
+
+    }
+
+  }
+
 }
 
 </script>
 
 </body>
-</html>
+
+</html
