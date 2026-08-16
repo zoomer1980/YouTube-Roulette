@@ -72,28 +72,6 @@ h1 {
   margin-bottom: 25px;
 }
 
-.categories {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 8px;
-  margin-bottom: 25px;
-}
-
-.category {
-  border: 1px solid #333;
-  background: #111;
-  color: #aaa;
-  padding: 9px 13px;
-  border-radius: 999px;
-  font-size: 12px;
-}
-
-.category.active {
-  background: white;
-  color: black;
-}
-
 .spin {
   display: inline-block;
   width: 100%;
@@ -105,14 +83,12 @@ h1 {
   text-decoration: none;
   font-size: 17px;
   font-weight: bold;
+  margin-bottom: 12px;
 }
 
-.spin:active {
-  transform: scale(.96);
-}
-
-.stats {
-  margin-top: 20px;
+.option {
+  display: block;
+  margin: 7px auto;
   color: #777;
   font-size: 12px;
 }
@@ -126,15 +102,6 @@ h1 {
   font-size: 11px;
 }
 
-@media(max-width:600px) {
-
-  #screen {
-    grid-template-columns: repeat(12,1fr);
-    grid-template-rows: repeat(20,1fr);
-  }
-
-}
-
 </style>
 </head>
 
@@ -145,11 +112,7 @@ h1 {
 <script>
 
 for(let i = 0; i < 240; i++) {
-
-  document.write(
-    '<div class="pixel"></div>'
-  );
-
+  document.write('<div class="pixel"></div>');
 }
 
 </script>
@@ -161,9 +124,7 @@ for(let i = 0; i < 240; i++) {
 
 <div class="panel">
 
-<div class="logo">
-🎰
-</div>
+<div class="logo">🎰</div>
 
 <h1>
 YouTube<br>
@@ -176,61 +137,48 @@ Enter the rabbit hole.
 </div>
 
 
-<div class="categories">
-
-<span class="category active">
-🎰 Surprise Me
-</span>
-
-<span class="category">
-🤯 Weird
-</span>
-
-<span class="category">
-🔬 Science
-</span>
-
-<span class="category">
-🌎 Places
-</span>
-
-<span class="category">
-🕵️ Mystery
-</span>
-
-<span class="category">
-🛠️ Machines
-</span>
-
-<span class="category">
-📚 History
-</span>
-
-<span class="category">
-🎵 Music
-</span>
-
-<span class="category">
-😂 Funny
-</span>
-
-</div>
+<a
+class="spin"
+href="https://www.youtube.com/watch?v=jNQXAC9IVRw"
+>
+🎰 RABBIT HOLE #1
+</a>
 
 
 <a
 class="spin"
-href="https://www.youtube.com/"
+href="https://www.youtube.com/watch?v=aqz-KE-bpKQ"
 >
-
-🎰 SPIN THE ROULETTE
-
+🎰 RABBIT HOLE #2
 </a>
 
 
-<div class="stats">
+<a
+class="spin"
+href="https://www.youtube.com/watch?v=ScMzIvxBSi4"
+>
+🎰 RABBIT HOLE #3
+</a>
 
-🕳️ Welcome to the rabbit hole
 
+<a
+class="spin"
+href="https://www.youtube.com/watch?v=9bZkp7q19f0"
+>
+🎰 RABBIT HOLE #4
+</a>
+
+
+<a
+class="spin"
+href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
+>
+🎰 RABBIT HOLE #5
+</a>
+
+
+<div class="option">
+Each button is a separate YouTube destination.
 </div>
 
 </div>
@@ -239,9 +187,7 @@ href="https://www.youtube.com/"
 
 
 <div id="hint">
-
 ⚠️ You have been warned.
-
 </div>
 
 </body>
