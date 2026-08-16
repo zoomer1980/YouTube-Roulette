@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>YouTube Roulette</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    background: #050505;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+#screen {
+    position: fixed;
+    inset: 0;
+    display: grid;
+    grid-template-columns: repeat(30, 1fr);
+    grid-template-rows: repeat(18, 1fr);
+}
+
+.pixel {
+    border: 1px solid rgba(255,255,255,0.025);
+    cursor: pointer;
+    transition: background 0.15s, transform 0.15s;
+}
+
+.pixel:hover {
+    background: rgba(255,255,255,0.08);
+    transform: scale(1.08);
+}
+
+#overlay {
+    position: fixed;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    pointer-events: none;
+}
+
+.panel {
+    pointer-events: auto;
+    background: rgba(5,5,5,0.88);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-radius: 20px;
+    padding: 35px;
+    max-width: 500px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+}
+
+h1 {
+    margin: 0 0 10px;
+    font-size: clamp(38px, 8vw, 72px);
+    letter-spacing: -3px;
+}
+
+.subtitle {
+    color: #aaa;
+    font-size: 17px;
+    margin-bottom: 28px;
+}
+
+button {
+    background: white;
+    color: black;
+    border: 0;
+    border-radius: 999px;
+    padding: 16px 28px;
+    font-size: 17px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.15s;
+}
+
+button:hover {
+    transform: scale(1.05);
+}
+
+#counter {
+    margin-top: 22px;
+    color: #777;
+    font-size: 14px;
+}
+
+#message {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: #666;
+    font-size: 12px;
+    pointer-events: none;
+}
+
+@media (max-width: 600px) {
+    #screen {
+        grid-template-columns: repeat(15, 1fr);
+        grid-template-rows: repeat(25, 1fr);
+    }
+
+    .panel {
+        margin: 20px;
+        padding: 28px 20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<div id="screen"></div>
+
+<div id="overlay">
+    <div class="panel">
+        <h1>🎰</h1>
+
+        <h1>YouTube<br>Roulette</h1>
+
+        <div class="subtitle">
+            Click anywhere.<br>
+            Find something you didn't know existed.
+        </div>
+
+        <button onclick="spin()">
+            SPIN THE ROULETTE
+        </button>
+
+        <div id="counter">
+            Rabbit holes entered: 0
+        </div>
+    </div>
+</div>
+
+<div id="message">
+    One click could change your entire evening.
+</div>
+
+<script>
+
+const videos = [
+    "https://www.youtube.com/watch?v=jNQXAC9IVRw",
+    "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+    "https://www.youtube.com/watch?v=9bZkp7q19f0",
+    "https://www.youtube.com/watch?v=aqz-KE-bpKQ",
+    "https://www.youtube.com/watch?v=ScMzIvxBSi4",
+    "https://www.youtube.com/watch?v=ysz5S6PUM-U",
+    "https://www.youtube.com/watch?v=Zi_XLOBDo_Y",
+    "https://www.youtube.com/watch?v=3JZ_D3ELwOQ",
+    "https://www.youtube.com/watch?v=kJQP7kiw5Fk",
+    "https://www.youtube.com/watch?v=fJ9rUzIMcZQ"
+];
+
+const screen = document.getElementById("screen");
+
+let count = Number(localStorage.getItem("rabbitHoles")) || 0;
+
+updateCounter();
+
+for (let i = 0; i < 540; i++) {
+
+    const pixel = document.createElement("div");
+
+    pixel.className = "pixel";
+
+    pixel.addEventListener("click", () => {
+        spin();
+    });
+
+    screen.appendChild(pixel);
+}
+
+function spin() {
+
+    count++;
+
+    localStorage.setItem("rabbitHoles", count);
+
+    updateCounter();
+
+    const randomVideo =
+        videos[Math.floor(Math.random() * videos.length)];
+
+    window.open(randomVideo, "_blank");
+}
+
+function updateCounter() {
+
+    document.getElementById("counter").textContent =
+        "Rabbit holes entered: " + count;
+}
+
+</script>
+
+</body>
+</html>
