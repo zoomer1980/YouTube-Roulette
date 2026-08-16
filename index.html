@@ -3,9 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>YouTube Roulette</title>
+
+<title>YouTube Roulette 🎰</title>
 
 <style>
+
 * {
   box-sizing: border-box;
 }
@@ -17,150 +19,256 @@ html, body {
   overflow: hidden;
   background: #050505;
   color: white;
-  font-family: Arial, sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
 }
+
+/* BACKGROUND */
 
 #screen {
   position: fixed;
   inset: 0;
+
   display: grid;
+
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(12, 1fr);
+
+  z-index: 1;
 }
 
 .pixel {
-  border: 1px solid rgba(255,255,255,.03);
+  border: 1px solid rgba(255,255,255,0.025);
 }
+
+/* MAIN PANEL */
 
 #overlay {
   position: fixed;
   inset: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   padding: 20px;
+
+  z-index: 5;
 }
 
 .panel {
-  width: min(92%, 600px);
+  width: min(92%, 620px);
+
   padding: 35px 25px;
+
   text-align: center;
-  background: rgba(5,5,5,.94);
-  border: 1px solid rgba(255,255,255,.15);
+
+  background: rgba(5,5,5,0.94);
+
+  border: 1px solid rgba(255,255,255,0.15);
+
   border-radius: 25px;
+
+  backdrop-filter: blur(15px);
+
+  box-shadow: 0 0 80px rgba(0,0,0,0.9);
 }
+
+/* LOGO */
 
 .logo {
   font-size: 55px;
 }
 
+/* TITLE */
+
 h1 {
   margin: 5px 0 15px;
+
   font-size: clamp(42px,10vw,75px);
-  line-height: .9;
+
+  line-height: 0.9;
+
   letter-spacing: -4px;
 }
 
+/* TAGLINE */
+
 .tagline {
   color: #aaa;
+
   line-height: 1.5;
+
   margin-bottom: 25px;
 }
 
+/* CATEGORIES */
+
 .categories {
+
   display: flex;
+
   flex-wrap: wrap;
+
   justify-content: center;
+
   gap: 8px;
+
   margin-bottom: 25px;
 }
 
 .category {
+
   border: 1px solid #333;
+
   background: #111;
+
   color: #aaa;
+
   padding: 9px 13px;
+
   border-radius: 999px;
+
   font-size: 12px;
 }
 
-.category.active {
-  background: white;
-  color: black;
-}
+/* SPIN */
 
 .spin {
+
   display: inline-block;
+
   width: 100%;
+
   max-width: 350px;
+
   padding: 18px;
+
   border-radius: 999px;
+
   background: white;
+
   color: black;
+
   text-decoration: none;
+
   font-size: 17px;
+
   font-weight: bold;
+
+  cursor: pointer;
 }
 
 .spin:active {
-  transform: scale(.96);
+
+  transform: scale(0.96);
+
 }
 
-.stats {
-  margin-top: 20px;
-  color: #777;
-  font-size: 12px;
+/* STATUS */
+
+#status {
+
+  min-height: 20px;
+
+  margin-top: 15px;
+
+  color: #aaa;
+
+  font-size: 13px;
 }
+
+/* FOOTER */
 
 #hint {
+
   position: fixed;
+
   bottom: 15px;
+
   width: 100%;
+
   text-align: center;
+
   color: #444;
+
   font-size: 11px;
+
+  z-index: 10;
 }
 
+
+/* MOBILE */
+
 @media(max-width:600px) {
+
   #screen {
+
     grid-template-columns: repeat(12,1fr);
+
     grid-template-rows: repeat(20,1fr);
+
   }
+
 }
+
 </style>
+
 </head>
 
 <body>
 
+
+<!-- BACKGROUND PIXELS -->
+
 <div id="screen">
 
 <script>
+
 for(let i = 0; i < 240; i++) {
-  document.write('<div class="pixel"></div>');
+
+  document.write(
+    '<div class="pixel"></div>'
+  );
+
 }
+
 </script>
 
 </div>
+
+
+<!-- MAIN INTERFACE -->
 
 <div id="overlay">
 
 <div class="panel">
 
-<div class="logo">🎰</div>
+
+<div class="logo">
+🎰
+</div>
+
 
 <h1>
 YouTube<br>
 Roulette
 </h1>
 
+
 <div class="tagline">
+
 Click the button.<br>
+
 Enter the rabbit hole.
+
 </div>
+
+
+<!-- CATEGORIES -->
 
 <div class="categories">
 
-<span class="category active">
+<span class="category">
 🎰 Surprise Me
 </span>
 
@@ -198,24 +306,142 @@ Enter the rabbit hole.
 
 </div>
 
+
+<!-- SPIN LINK -->
+
 <a
+id="spin"
 class="spin"
 href="https://www.youtube.com/"
 >
+
 🎰 SPIN THE ROULETTE
+
 </a>
 
-<div class="stats">
-🕳️ Welcome to the rabbit hole
+
+<div id="status">
+
+Ready...
+
 </div>
+
 
 </div>
 
 </div>
+
 
 <div id="hint">
+
 ⚠️ You have been warned.
+
 </div>
+
+
+<script>
+
+
+/* =================================
+   VIDEO LIST
+================================= */
+
+const videos = [
+
+  "jNQXAC9IVRw",
+
+  "dQw4w9WgXcQ",
+
+  "9bZkp7q19f0",
+
+  "aqz-KE-bpKQ",
+
+  "ScMzIvxBSi4",
+
+  "ysz5S6PUM-U",
+
+  "Zi_XLOBDo_Y",
+
+  "3JZ_D3ELwOQ",
+
+  "kJQP7kiw5Fk",
+
+  "fJ9rUzIMcZQ"
+
+];
+
+
+/* =================================
+   SPIN LINK
+================================= */
+
+const spin =
+  document.getElementById("spin");
+
+
+const status =
+  document.getElementById("status");
+
+
+/* =================================
+   CHOOSE RANDOM VIDEO
+================================= */
+
+function chooseVideo() {
+
+  const randomIndex =
+
+    Math.floor(
+      Math.random()
+      * videos.length
+    );
+
+
+  const video =
+    videos[randomIndex];
+
+
+  /* CHANGE LINK DESTINATION */
+
+  spin.href =
+    "https://www.youtube.com/watch?v="
+    + video;
+
+
+  status.textContent =
+    "🎬 Rabbit hole selected!";
+
+
+}
+
+
+/* =================================
+   CHANGE VIDEO BEFORE CLICK
+================================= */
+
+spin.addEventListener(
+  "pointerdown",
+  chooseVideo
+);
+
+
+/* ALSO SUPPORT TOUCH */
+
+spin.addEventListener(
+  "touchstart",
+  chooseVideo
+);
+
+
+/* ALSO SUPPORT MOUSE */
+
+spin.addEventListener(
+  "mousedown",
+  chooseVideo
+);
+
+
+</script>
 
 </body>
 </html>
