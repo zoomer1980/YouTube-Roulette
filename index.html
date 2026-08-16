@@ -22,17 +22,12 @@ html, body {
   font-family: Arial, Helvetica, sans-serif;
 }
 
-/* BACKGROUND PIXELS */
-
 #screen {
   position: fixed;
   inset: 0;
-
   display: grid;
-
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(12, 1fr);
-
   z-index: 1;
 }
 
@@ -40,209 +35,110 @@ html, body {
   border: 1px solid rgba(255,255,255,0.025);
 }
 
-
-/* MAIN INTERFACE */
-
 #overlay {
   position: fixed;
   inset: 0;
-
   display: flex;
   justify-content: center;
   align-items: center;
-
   padding: 20px;
-
   z-index: 5;
 }
 
 .panel {
-  width: min(92%, 620px);
-
+  width: min(92%, 600px);
   padding: 35px 25px;
-
   text-align: center;
-
   background: rgba(5,5,5,0.94);
-
   border: 1px solid rgba(255,255,255,0.15);
-
   border-radius: 25px;
-
   backdrop-filter: blur(15px);
-
-  box-shadow: 0 0 80px rgba(0,0,0,0.9);
 }
-
-
-/* LOGO */
 
 .logo {
   font-size: 55px;
 }
 
-
-/* TITLE */
-
 h1 {
   margin: 5px 0 15px;
-
   font-size: clamp(42px,10vw,75px);
-
-  line-height: 0.9;
-
+  line-height: .9;
   letter-spacing: -4px;
 }
 
-
-/* TAGLINE */
-
 .tagline {
   color: #aaa;
-
   line-height: 1.5;
-
   margin-bottom: 25px;
 }
-
-
-/* CATEGORIES */
 
 .categories {
-
   display: flex;
-
   flex-wrap: wrap;
-
   justify-content: center;
-
   gap: 8px;
-
   margin-bottom: 25px;
 }
 
-
 .category {
-
   border: 1px solid #333;
-
   background: #111;
-
   color: #aaa;
-
   padding: 9px 13px;
-
   border-radius: 999px;
-
   font-size: 12px;
-
-  cursor: pointer;
-
-  -webkit-tap-highlight-color: transparent;
 }
-
 
 .category.active {
-
   background: white;
-
   color: black;
-
-  border-color: white;
 }
-
-
-/* SPIN BUTTON */
 
 .spin {
-
   display: inline-block;
-
   width: 100%;
-
   max-width: 350px;
-
   padding: 18px;
-
   border-radius: 999px;
-
   background: white;
-
   color: black;
-
   text-decoration: none;
-
   font-size: 17px;
-
   font-weight: bold;
-
-  cursor: pointer;
 }
-
 
 .spin:active {
-
-  transform: scale(0.96);
-
+  transform: scale(.96);
 }
 
-
-/* STATUS */
-
-#status {
-
-  min-height: 20px;
-
-  margin-top: 15px;
-
-  color: #aaa;
-
-  font-size: 13px;
+.stats {
+  margin-top: 20px;
+  color: #777;
+  font-size: 12px;
 }
-
-
-/* FOOTER */
 
 #hint {
-
   position: fixed;
-
   bottom: 15px;
-
   width: 100%;
-
   text-align: center;
-
   color: #444;
-
   font-size: 11px;
-
-  z-index: 10;
 }
-
-
-/* MOBILE */
 
 @media(max-width:600px) {
 
   #screen {
-
     grid-template-columns: repeat(12,1fr);
-
     grid-template-rows: repeat(20,1fr);
-
   }
 
 }
 
 </style>
-
 </head>
 
 <body>
-
-
-<!-- BACKGROUND -->
 
 <div id="screen">
 
@@ -261,117 +157,67 @@ for(let i = 0; i < 240; i++) {
 </div>
 
 
-<!-- MAIN PANEL -->
-
 <div id="overlay">
 
 <div class="panel">
 
-
 <div class="logo">
 🎰
 </div>
-
 
 <h1>
 YouTube<br>
 Roulette
 </h1>
 
-
 <div class="tagline">
-
 Click the button.<br>
-
 Enter the rabbit hole.
-
 </div>
 
-
-<!-- CATEGORIES -->
 
 <div class="categories">
 
-
-<button
-class="category active"
-data-category="all"
->
+<span class="category active">
 🎰 Surprise Me
-</button>
+</span>
 
-
-<button
-class="category"
-data-category="weird"
->
+<span class="category">
 🤯 Weird
-</button>
+</span>
 
-
-<button
-class="category"
-data-category="science"
->
+<span class="category">
 🔬 Science
-</button>
+</span>
 
-
-<button
-class="category"
-data-category="places"
->
+<span class="category">
 🌎 Places
-</button>
+</span>
 
-
-<button
-class="category"
-data-category="mystery"
->
+<span class="category">
 🕵️ Mystery
-</button>
+</span>
 
-
-<button
-class="category"
-data-category="machines"
->
+<span class="category">
 🛠️ Machines
-</button>
+</span>
 
-
-<button
-class="category"
-data-category="history"
->
+<span class="category">
 📚 History
-</button>
+</span>
 
-
-<button
-class="category"
-data-category="music"
->
+<span class="category">
 🎵 Music
-</button>
+</span>
 
-
-<button
-class="category"
-data-category="funny"
->
+<span class="category">
 😂 Funny
-</button>
-
+</span>
 
 </div>
 
 
-<!-- SPIN -->
-
 <a
-id="spin"
 class="spin"
 href="https://www.youtube.com/"
 >
@@ -381,12 +227,11 @@ href="https://www.youtube.com/"
 </a>
 
 
-<div id="status">
+<div class="stats">
 
-Choose a category or surprise yourself.
+🕳️ Welcome to the rabbit hole
 
 </div>
-
 
 </div>
 
@@ -398,305 +243,6 @@ Choose a category or surprise yourself.
 ⚠️ You have been warned.
 
 </div>
-
-
-<script>
-
-
-/* =================================
-   VIDEO DATABASE
-================================= */
-
-const videos = {
-
-  all: [
-
-    "jNQXAC9IVRw",
-
-    "dQw4w9WgXcQ",
-
-    "9bZkp7q19f0",
-
-    "aqz-KE-bpKQ",
-
-    "ScMzIvxBSi4",
-
-    "ysz5S6PUM-U",
-
-    "Zi_XLOBDo_Y",
-
-    "3JZ_D3ELwOQ",
-
-    "kJQP7kiw5Fk",
-
-    "fJ9rUzIMcZQ"
-
-  ],
-
-
-  weird: [
-
-    "jNQXAC9IVRw",
-
-    "ScMzIvxBSi4"
-
-  ],
-
-
-  science: [
-
-    "aqz-KE-bpKQ",
-
-    "ysz5S6PUM-U"
-
-  ],
-
-
-  places: [
-
-    "Zi_XLOBDo_Y"
-
-  ],
-
-
-  mystery: [
-
-    "3JZ_D3ELwOQ"
-
-  ],
-
-
-  machines: [
-
-    "kJQP7kiw5Fk"
-
-  ],
-
-
-  history: [
-
-    "fJ9rUzIMcZQ"
-
-  ],
-
-
-  music: [
-
-    "9bZkp7q19f0",
-
-    "fJ9rUzIMcZQ"
-
-  ],
-
-
-  funny: [
-
-    "dQw4w9WgXcQ"
-
-  ]
-
-};
-
-
-/* =================================
-   CURRENT CATEGORY
-================================= */
-
-let currentCategory = "all";
-
-
-/* =================================
-   ELEMENTS
-================================= */
-
-const spin =
-  document.getElementById("spin");
-
-
-const status =
-  document.getElementById("status");
-
-
-const categoryButtons =
-  document.querySelectorAll(
-    ".category"
-  );
-
-
-/* =================================
-   CATEGORY SELECTION
-================================= */
-
-categoryButtons.forEach(
-  button => {
-
-    button.addEventListener(
-      "click",
-      function(event) {
-
-        /*
-          Prevent the click from
-          activating anything else.
-        */
-
-        event.preventDefault();
-
-        event.stopPropagation();
-
-
-        /*
-          Remove active state.
-        */
-
-        categoryButtons.forEach(
-          b =>
-            b.classList.remove(
-              "active"
-            )
-        );
-
-
-        /*
-          Activate selected category.
-        */
-
-        this.classList.add(
-          "active"
-        );
-
-
-        /*
-          Store category.
-        */
-
-        currentCategory =
-          this.dataset.category;
-
-
-        /*
-          Update message.
-        */
-
-        if(
-          currentCategory === "all"
-        ) {
-
-          status.textContent =
-            "🎰 Surprise mode selected.";
-
-        }
-
-        else {
-
-          status.textContent =
-            this.textContent.trim()
-            + " selected.";
-
-        }
-
-
-        /*
-          Choose a new video
-          for the Spin button.
-        */
-
-        chooseVideo();
-
-      }
-
-    );
-
-  }
-);
-
-
-/* =================================
-   CHOOSE RANDOM VIDEO
-================================= */
-
-function chooseVideo() {
-
-
-  const pool =
-    videos[currentCategory];
-
-
-  if(
-    !pool ||
-    pool.length === 0
-  ) {
-
-    return;
-
-  }
-
-
-  const randomIndex =
-    Math.floor(
-      Math.random()
-      * pool.length
-    );
-
-
-  const video =
-    pool[randomIndex];
-
-
-  /*
-    Change the normal
-    HTML link destination.
-  */
-
-  spin.href =
-    "https://www.youtube.com/watch?v="
-    + video;
-
-
-}
-
-
-/* =================================
-   CHOOSE VIDEO WHEN SPIN PRESSED
-================================= */
-
-spin.addEventListener(
-
-  "pointerdown",
-
-  function() {
-
-    chooseVideo();
-
-  }
-
-);
-
-
-/* =================================
-   TOUCH SUPPORT
-================================= */
-
-spin.addEventListener(
-
-  "touchstart",
-
-  function() {
-
-    chooseVideo();
-
-  }
-
-);
-
-
-/* =================================
-   INITIAL VIDEO
-================================= */
-
-chooseVideo();
-
-
-</script>
 
 </body>
 </html>
