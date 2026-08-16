@@ -25,9 +25,12 @@ html, body {
 #screen {
   position: fixed;
   inset: 0;
+
   display: grid;
+
   grid-template-columns: repeat(20, 1fr);
   grid-template-rows: repeat(12, 1fr);
+
   z-index: 1;
 }
 
@@ -38,21 +41,32 @@ html, body {
 #overlay {
   position: fixed;
   inset: 0;
+
   display: flex;
   justify-content: center;
   align-items: center;
+
   padding: 20px;
+
   z-index: 5;
 }
 
 .panel {
   width: min(92%, 600px);
+
   padding: 35px 25px;
+
   text-align: center;
+
   background: rgba(5,5,5,0.94);
+
   border: 1px solid rgba(255,255,255,0.15);
+
   border-radius: 25px;
+
   backdrop-filter: blur(15px);
+
+  box-shadow: 0 0 80px rgba(0,0,0,0.9);
 }
 
 .logo {
@@ -61,45 +75,74 @@ html, body {
 
 h1 {
   margin: 5px 0 15px;
+
   font-size: clamp(42px,10vw,75px);
+
   line-height: .9;
+
   letter-spacing: -4px;
 }
 
 .tagline {
   color: #aaa;
+
   line-height: 1.5;
-  margin-bottom: 25px;
+
+  margin-bottom: 30px;
 }
 
 .spin {
   display: inline-block;
+
   width: 100%;
+
   max-width: 350px;
-  padding: 18px;
+
+  padding: 19px;
+
   border-radius: 999px;
+
   background: white;
+
   color: black;
+
   text-decoration: none;
+
   font-size: 17px;
+
   font-weight: bold;
-  margin-bottom: 12px;
+
+  cursor: pointer;
+
+  -webkit-tap-highlight-color: transparent;
 }
 
-.option {
-  display: block;
-  margin: 7px auto;
+.spin:active {
+  transform: scale(.96);
+}
+
+.status {
+  margin-top: 18px;
+
   color: #777;
-  font-size: 12px;
+
+  font-size: 13px;
 }
 
 #hint {
   position: fixed;
+
   bottom: 15px;
+
   width: 100%;
+
   text-align: center;
+
   color: #444;
+
   font-size: 11px;
+
+  z-index: 10;
 }
 
 </style>
@@ -107,12 +150,17 @@ h1 {
 
 <body>
 
+
 <div id="screen">
 
 <script>
 
-for(let i = 0; i < 240; i++) {
-  document.write('<div class="pixel"></div>');
+for (let i = 0; i < 240; i++) {
+
+  document.write(
+    '<div class="pixel"></div>'
+  );
+
 }
 
 </script>
@@ -124,12 +172,17 @@ for(let i = 0; i < 240; i++) {
 
 <div class="panel">
 
-<div class="logo">🎰</div>
+
+<div class="logo">
+🎰
+</div>
+
 
 <h1>
 YouTube<br>
 Roulette
 </h1>
+
 
 <div class="tagline">
 Click the button.<br>
@@ -138,48 +191,24 @@ Enter the rabbit hole.
 
 
 <a
+id="roulette"
 class="spin"
-href="https://www.youtube.com/watch?v=jNQXAC9IVRw"
+href="https://www.youtube.com/"
+onclick="spinRoulette(event)"
 >
-🎰 RABBIT HOLE #1
+
+🎰 SPIN THE ROULETTE
+
 </a>
 
 
-<a
-class="spin"
-href="https://www.youtube.com/watch?v=aqz-KE-bpKQ"
+<div
+id="status"
+class="status"
 >
-🎰 RABBIT HOLE #2
-</a>
-
-
-<a
-class="spin"
-href="https://www.youtube.com/watch?v=ScMzIvxBSi4"
->
-🎰 RABBIT HOLE #3
-</a>
-
-
-<a
-class="spin"
-href="https://www.youtube.com/watch?v=9bZkp7q19f0"
->
-🎰 RABBIT HOLE #4
-</a>
-
-
-<a
-class="spin"
-href="https://www.youtube.com/watch?v=dQw4w9WgXcQ"
->
-🎰 RABBIT HOLE #5
-</a>
-
-
-<div class="option">
-Each button is a separate YouTube destination.
+Ready to roll...
 </div>
+
 
 </div>
 
@@ -189,6 +218,99 @@ Each button is a separate YouTube destination.
 <div id="hint">
 ⚠️ You have been warned.
 </div>
+
+
+<script>
+
+/*
+========================================
+VIDEO POOL
+========================================
+*/
+
+const videos = [
+
+  "jNQXAC9IVRw",
+
+  "aqz-KE-bpKQ",
+
+  "ScMzIvxBSi4",
+
+  "9bZkp7q19f0",
+
+  "dQw4w9WgXcQ",
+
+  "ysz5S6PUM-U",
+
+  "Zi_XLOBDo_Y",
+
+  "3JZ_D3ELwOQ",
+
+  "kJQP7kiw5Fk",
+
+  "fJ9rUzIMcZQ"
+
+];
+
+
+/*
+========================================
+ROULETTE
+========================================
+*/
+
+function spinRoulette(event) {
+
+  const button =
+    document.getElementById("roulette");
+
+  const status =
+    document.getElementById("status");
+
+
+  /*
+  Pick a random video.
+  */
+
+  const randomNumber =
+    Math.floor(
+      Math.random() * videos.length
+    );
+
+
+  const video =
+    videos[randomNumber];
+
+
+  /*
+  Change the normal link.
+  */
+
+  button.href =
+    "https://www.youtube.com/watch?v="
+    + video;
+
+
+  /*
+  Show confirmation.
+  */
+
+  status.textContent =
+    "🎬 Rabbit hole selected!";
+
+
+  /*
+  IMPORTANT:
+
+  We DO NOT prevent the click.
+
+  The browser will now follow
+  the newly-created normal link.
+  */
+
+}
+
+</script>
 
 </body>
 </html>
